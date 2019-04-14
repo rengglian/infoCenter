@@ -1,0 +1,26 @@
+* {
+    font-family: Helvetica; 
+}
+
+#heading { 
+    color: #C4262E; 
+    font-size: 35px;
+}
+div.textNorm { 
+    color: #4D4F53; 
+    font-size: 35px;
+}
+
+div.textSmall { 
+    color: #4D4F53; 
+    font-size: 15px;
+}
+
+div.infoBox {
+    display: block;
+    width: 680px;
+    height: 360px;  
+    padding: 50px;
+    border: 1px solid #C4262E;
+    border-radius: 15px;
+  }
