@@ -29,7 +29,9 @@ type Page struct {
 
 // Information is the main struct
 type Information struct {
-	DateTime    string
+	DateStr     string
+	TimeStr     string
+	Time        string
 	StationName string
 	SongName    string
 	Status      string
@@ -66,18 +68,20 @@ func loadInformation() (*Page, error) {
 	ipAddr := "http://192.168.0.143/"
 	var info Information
 	if getPowerState(ipAddr) == 1 {
-		info.DateTime = getDateTimeString(ipAddr)
+		info.DateStr = getDateString(ipAddr)
+		info.TimeStr = getTimeString(ipAddr)
 		info.StationName = getStationString(ipAddr)
 		info.SongName = getSongString(ipAddr)
 		info.Status = "Power On"
 	} else {
-		info.DateTime = "None"
+		info.DateStr = getDateString(ipAddr)
+		info.TimeStr = getTimeString(ipAddr)
 		info.StationName = "None"
 		info.SongName = "None"
 		info.Status = "Power Off"
 	}
 
-	reqinfo.ElapasedStr = time.Since(start).String()
+	reqinfo.ElapasedStr = time.Since(start).Truncate(time.Millisecond).String()
 	return &Page{Title: "InfoCenter", Info: info, RequestInfo: reqinfo}, nil
 }
 
@@ -124,8 +128,8 @@ func getTimeString(ipAddr string) string {
 	var fsapiResponse FsapiResponse
 	err = xml.NewDecoder(resp.Body).Decode(&fsapiResponse)
 	checkError("XML Decode Error", err)
-
-	return fsapiResponse.Value[0].C8Array
+	dateTime, err := time.Parse("150405", fsapiResponse.Value[0].C8Array)
+	return dateTime.Format("15:04")
 }
 
 func getDateString(ipAddr string) string {
@@ -138,17 +142,9 @@ func getDateString(ipAddr string) string {
 	var fsapiResponse FsapiResponse
 	err = xml.NewDecoder(resp.Body).Decode(&fsapiResponse)
 	checkError("XML Decode Error", err)
+	dateTime, err := time.Parse("20060102", fsapiResponse.Value[0].C8Array)
 
-	return fsapiResponse.Value[0].C8Array
-}
-
-func getDateTimeString(ipAddr string) string {
-	var str strings.Builder
-	str.WriteString(getDateString(ipAddr))
-	str.WriteString(getTimeString(ipAddr))
-	dateTime, err := time.Parse("20060102150405", str.String())
-	checkError("Pase Time Failed", err)
-	return dateTime.Format("Mon Jan _2 2006 - 15:04")
+	return dateTime.Format("Mon Jan _2 2006")
 }
 
 func getStationString(ipAddr string) string {

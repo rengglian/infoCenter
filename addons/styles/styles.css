@@ -1,26 +1,37 @@
-* {
-    font-family: Helvetica; 
-}
-
-#heading { 
-    color: #C4262E; 
-    font-size: 35px;
-}
-div.textNorm { 
-    color: #4D4F53; 
-    font-size: 35px;
-}
-
-div.textSmall { 
-    color: #4D4F53; 
-    font-size: 15px;
-}
-
-div.infoBox {
-    display: block;
-    width: 680px;
-    height: 360px;  
-    padding: 50px;
-    border: 1px solid #C4262E;
-    border-radius: 15px;
+@font-face {
+    font-family: LCARSGTJ3;
+    src: url(../fonts/LCARSGTJ3.ttf);
   }
+
+* {
+    font-family: LCARSGTJ3; 
+}
+
+body {
+    background-color: black;
+    overflow: hidden;
+}
+
+a:link , a:visited, a:hover a:active {
+    color: black;
+    font-size: 100px;
+    text-decoration: none;
+}
+
+#overlay {
+    color: #FFCC66;
+    font-size: 64px;
+    position: absolute;
+    z-index:100;
+    width: 430px;
+    left:264px;
+    top:146.5px;
+}
+
+#overlayShutdown {
+    position: absolute;
+    z-index:100;
+    left:60px;
+    top:-7px;
+}
+
