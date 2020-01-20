@@ -1,37 +1,317 @@
 @font-face {
+    font-family: UniversCom;
+    src: url(../fonts/UniversCom-65Bold.ttf);
+}
+
+@font-face {
     font-family: LCARSGTJ3;
     src: url(../fonts/LCARSGTJ3.ttf);
-  }
+}
 
 * {
-    font-family: LCARSGTJ3; 
+    font-family: UniversCom; 
 }
 
 body {
-    background-color: black;
-    overflow: hidden;
+    background: #000000; /* linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url('/addons/images/startrek.png');*/
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    table-layout: fixed;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height:80%;
+}
+
+.item1 { 
+    grid-area: menu;
+}
+.item2 { 
+    grid-area: header;
+    line-height: 50px;
+}
+.item3 { 
+    grid-area: main; 
+}
+.item4 { 
+    grid-area: right; 
+}
+.item5 { 
+    grid-area: leftCorner; 
+} 
+.item6 { 
+    grid-area: footer;
+    line-height: 50px; 
+} 
+.item7 { 
+    grid-area: topRight; 
+} 
+.item8 { 
+    grid-area: bottomRight; 
+}
+.item9 { 
+    grid-area: left1;
+    width: 160px;
+}
+.item10 { 
+    grid-area: left2;
+    width: 160px;
+}
+.item11 { 
+    grid-area: left3;
+    width: 160px;
+}
+.item12 { 
+    grid-area: left4;
+    width: 160px;
+}
+.item13 { 
+    grid-area: left5;
+    width: 160px;
+} 
+
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'menu header topRight'
+    'menu main right'
+    'left1 main right'
+    'left2 main right'
+    'left3 main right'
+    'left4 main right'
+    'left5 main right'
+    'leftCorner main right'
+    'leftCorner footer bottomRight';
+  grid-gap: 5px;
+  background-color: none;
+  padding: 0px;
+  grid-template-rows: 37px 37px 1fr  1fr 1fr 1fr 1fr 37px 37px;
+  grid-template-columns: 250px 1fr 37px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
 }
 
 a:link , a:visited, a:hover a:active {
     color: black;
-    font-size: 100px;
     text-decoration: none;
 }
 
-#overlay {
+#shutdown {
+    font-family: LCARSGTJ3;
+    font-size: 75px;
+    color: black;
+}
+
+#shutdownOn {
+    font-family: LCARSGTJ3;
+    font-size: 75px;
+    color: black;
+    text-shadow: 0 0 25px #2E8B57;
+}
+
+#shutdownOff {
+    font-family: LCARSGTJ3;
+    font-size: 75px;
+    color: black;
+    text-shadow: 0 0 25px #882211;
+}
+
+#topBorder {
+    background-color: #CC6699;
+}
+
+#topRight {
+    background-color: #CC6699;
+    font-size: 50px;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+
+#timeCell {
+    font-size: 50px;
+    color: #CC6699;
+    text-transform: uppercase;
+    background-color: #000000; 
+    padding-top: 0px;
+    padding-left: 5px;
+    text-align: right;
+    float:right;
+}
+
+#dateCell {
+    font-size: 50px;
+    color: #882211;
+    text-transform: uppercase;
+    background-color: #000000; 
+    padding-top: 0px;
+    padding-left: 5px;
+    text-align: right;
+    float:right;
+}
+
+#bottomBorder {
+    background-color: #882211;
+}
+
+#topCorner {
+    background-image:url('/addons/images/topCorner.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #000000;
+}
+
+#mainFrame {
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-color: #00000000;
+}
+
+#bottomCorner {
+    background-image:url('/addons/images/bottomCorner.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #00000000;
+    text-align: right;
+}
+
+#rightSidebar {
+    background-color: #00000000;
+    height: 100%;
+}
+
+#stationCell {
+    font-size: 45px;
+    color: #3A93D1;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#stationCellSmall {
+    font-size: 17px;
+    color: #3A93D1;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#songCell {
+    font-size: 45px;
     color: #FFCC66;
-    font-size: 64px;
-    position: absolute;
-    z-index:100;
-    width: 430px;
-    left:264px;
-    top:146.5px;
+    text-align: left;
+    text-transform: uppercase;
 }
 
-#overlayShutdown {
-    position: absolute;
-    z-index:100;
-    left:60px;
-    top:-7px;
+#songCellSmall {
+    font-size: 17px;
+    color: #FFCC66;
+    text-align: left;
+    text-transform: uppercase;
 }
 
+#blueCell {
+    font-size: 45px;
+    color: #006699;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#blueCellSmall {
+    font-size: 17px;
+    color: #006699;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#homeButton {
+    background-color: #3A93D1;
+    font-size: 35px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+
+#radioButton {
+    font-size: 35px;
+    background-color: #FFCC66;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+
+}
+
+#rand1Button {
+    font-size: 35px;
+    background-color: #006699;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+
+#labButton {
+    font-size: 35px;
+    background-color: #CC99CC;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+
+#aboutButton {
+    font-size: 35px;
+    background-color: #C77000;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+
+#icon {
+    height:55px;
+    vertical-align:middle
+}
+
+#presetList {
+    background-color: #FFCC66;
+    font-size: 20px;
+    color: #000000;
+    text-align: left;
+    text-transform: uppercase;
+    line-height: 1.5;
+    border-radius: 25px 25px 25px 25px;
+    float: left;
+    margin-right: 5px; 
+}
+
+#volumeControl {
+    background-color: #006699;
+    font-size: 50px;
+    color: #000000;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1.5;
+    border-radius: 25px 25px 25px 25px;
+    float: left;
+    margin-right: 5px; 
+}
+
+#buttonIcon {
+    position:relative;
+    top:3px;
+    height: 35px;
+    vertical-align: center;
+}
+
+.activeButton {
+    width:200px; 
+    border-radius: 0px 25px 25px 0px;
+}

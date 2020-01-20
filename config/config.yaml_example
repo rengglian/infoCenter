@@ -1,0 +1,15 @@
+# config.yaml
+
+server:
+    ports: ":8080"
+
+radio:
+    ip: "http://192.168.0.123/"
+    pin: "1234"
+
+elasticsearch:
+    ip: "https://192.168.0.456:9200"
+    cert: "PATH TO *.crt"
+    key: "PATH TO *.key"
+    user: "golang_reader"
+    pw: "WHATEVERYOURPWIS"

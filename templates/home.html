@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta http-equiv="refresh" content="120" />
+		<link rel="stylesheet" type="text/css" href="/addons/styles/styles.css?v=1.2">
+	</head>
+	
+	<body>
+        <div class="grid-container">
+            <div class="item1" id="topCorner"><div id="shutdown">&emsp;&#0133</div></div>
+            <div class="item2" id="topBorder"><div id="timeCell">{{.Info.TimeStr}}</div></div>
+            <div class="item4" id="rightSidebar"></div>
+            <div class="item5" id="bottomCorner"><br><br><br>REQUEST TOOK: {{.RequestInfo.ElapasedStr}}</div>
+            <div class="item6" id="bottomBorder"><div id="dateCell">{{.Info.DateStr}}</div></div>
+            <div class="item7" id="topBorder"></div>
+            <div class="item8" id="bottomBorder"></div>
+            <div class="item9 activeButton" id="homeButton">Home</div> 
+            <div class="item10" id="radioButton"><a href="../radio/index">Radio</a></div> 
+            <div class="item11" id="rand1Button"></div> 
+            <div class="item12" id="labButton"><a href="../lab/index">lab</a></div> 
+            <div class="item13" id="aboutButton"><a href="../about/index">About</a></div> 
+            <div class="item3" id="mainFrame">
+                <br>
+                
+                    {{range .LocationInfo.Items}}
+                    <a href="../tempGraph/{{.Location}}"><div id="{{.ID}}"><img src="/addons/images/{{.Icon}}" alt="{{.Location}}" id="icon">&emsp;{{printf "%.1f" .Temperature}}°C / {{printf "%.1f" .Humidity}}%</div>
+                    <div id="{{.ID}}Small">&darr;{{printf "%.1f" .MinTemperature}}°C @ {{.MinTimeStr}}</div>
+                    <div id="{{.ID}}Small">&uarr;{{printf "%.1f" .MaxTemperature}}°C @ {{.MaxTimeStr}}</div></a>
+                    <br>
+                    {{end}}
+            </div>
+        </div>
+        <script src="/addons/js/refresh.js"></script>
+	</body>
+
+</html>

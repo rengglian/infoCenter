@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta http-equiv="refresh" content="10" />
+		<link rel="stylesheet" type="text/css" href="/addons/styles/styles.css?v=1.2">
+	</head>
+	
+	<body>
+        <div class="grid-container">
+            <div class="item1" id="topCorner"><a href="../radio/shutdown" id="{{.Info.Status}}">&emsp;&#0133</a></div>
+            <div class="item2" id="topBorder"><div id="timeCell">{{.Info.TimeStr}}</div></div>
+            <div class="item4" id="rightSidebar"></div>
+            <div class="item5" id="bottomCorner"><br><br><br>REQUEST TOOK: {{.RequestInfo.ElapasedStr}}</div>
+            <div class="item6" id="bottomBorder"><div id="dateCell">{{.Info.DateStr}}</div></div>
+            <div class="item7" id="topBorder"></div>
+            <div class="item8" id="bottomBorder"></div>
+            <div class="item9" id="homeButton"><a href="../home/index">Home</a></div> 
+            <div class="item10 activeButton" id="radioButton"><a href="../radioControl/set">Radio&emsp;<img src="/addons/images/console.svg" id="buttonIcon"></a></div> 
+            <div class="item11" id="rand1Button"></div> 
+            <div class="item12" id="labButton"><a href="../lab/index">lab</a></div> 
+            <div class="item13" id="aboutButton"><a href="../about/index">About</a></div> 
+            <div class="item3" id="mainFrame">
+                <br>
+                <div id="stationCellSmall">{{.Info.StationName}}</div>
+                <div id="songCell">{{.Info.SongName}}</div>
+            </div>
+        </div>
+	</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta http-equiv="refresh" content="300" />
+        <link rel="stylesheet" type="text/css" href="/addons/styles/styles.css?v=1.2">
+        <script src="https://cdn.jsdelivr.net/npm/vega@5.7.2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.0-beta.10"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@5.1.3"></script>
+    </head>
+	<body>
+        <div class="grid-container">
+          <div class="item1" id="topCorner"><div id="shutdown">&emsp;&#0133</div></div>
+          <div class="item2" id="topBorder"><div id="timeCell">{{.Title}}</div></div>
+          <div class="item4" id="rightSidebar"></div>
+          <div class="item5" id="bottomCorner"><br><br><br>REQUEST TOOK: {{.RequestInfo.ElapasedStr}}</div>
+          <div class="item6" id="bottomBorder"><div id="dateCell">Last Week</div></div>
+          <div class="item7" id="topBorder"></div>
+          <div class="item8" id="bottomBorder"></div>
+          <div class="item9 activeButton" id="homeButton"><a href="../home/index">Home</a></div> 
+          <div class="item10" id="radioButton"><a href="../radio/index">Radio</a></div> 
+          <div class="item11" id="rand1Button"></div> 
+          <div class="item12" id="labButton"><a href="../lab/index">lab</a></div> 
+          <div class="item13" id="aboutButton"><a href="../about/index">About</a></div> 
+            <div class="item3" id="mainFrame">
+
+                    <div id="vis" style="width:82%"></div>
+
+                    <script type="text/javascript">
+                    var vlSpec = {
+                      $schema: "https://vega.github.io/schema/vega-lite/v4.json",
+                      description: "A scatterplot showing horsepower and miles per gallons.",
+                      "width":"container",
+                      "height": 280,
+                      "data": {
+                        "values" : [
+                          {{range .TempInfo.Points}}
+                            {"date": {{.TimeStr}}, "y1": {{.Temperature}}, "y2": {{.Humidity}}},
+                          {{end}}
+                        ]
+                      },
+                      "encoding": {
+                        "x": {
+                          "field": "date",
+                          "type": "temporal",
+                          "axis": {"format": "%A", "labelAngle": -90,"grid": true, "gridOpacity":0.25, "title":false}
+                        }
+                      },
+                      "layer": [
+                        {
+                          "selection": {"grid": {"type": "interval", "bind": "scales"}},
+                          "mark": {"color": "red", "type": "line", "point": false, "tooltip": true},
+                          "encoding": {
+                            "y": {
+                              "field": "y1",
+                              "type": "quantitative",
+                              "axis": {"title": "Temperature", "titleColor": "red", "grid": true, "gridOpacity":0.25}
+                            }
+                          }
+                        },
+                        {
+                          "mark": {
+                            "color": "#85A9C5",
+                            "type": "line",
+                            "point": false,
+                            "tooltip": true
+                          },
+                          "encoding": {
+                            "y": {
+                              "field": "y2",
+                              "type": "quantitative",
+                              "axis": {"title": "Humitidy", "titleColor": "#85A9C5"},
+                              "scale": {"domain": [30, 70]}
+                            }
+                          }
+                        }
+                      ],
+                      "resolve": {"scale": {"y": "independent"}},
+                      "config": {
+                        "background": "#000000",
+                        "title": {"color": "#fff"},
+                        "style": {"guide-label": {"fill": "#fff"}, "guide-title": {"fill": "#fff"}},
+                        "axis": {"domainColor": "#fff", "gridColor": "#888", "tickColor": "#fff"}
+                      }
+                    };
+
+                    // Embed the visualization in the container with id `vis`
+                    vegaEmbed('#vis', vlSpec);
+                    </script>                              
+
+            </div>
+        </div>
+    </body>
+</html>

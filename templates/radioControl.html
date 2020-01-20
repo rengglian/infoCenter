@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/addons/styles/styles.css?v=1.2">
+	</head>
+	
+	<body>
+        <div class="grid-container">
+            <div class="item1" id="topCorner"><a href="../radio/shutdown" id="{{.Info.Status}}">&emsp;&#0133</a></div>
+            <div class="item2" id="topBorder"><div id="timeCell">Radio Control</div></div>
+            <div class="item4" id="rightSidebar"></div>
+            <div class="item5" id="bottomCorner"><br><br><br>REQUEST TOOK: {{.RequestInfo.ElapasedStr}}</div>
+            <div class="item6" id="bottomBorder"><a href="../radio/index"><div id="dateCell">Exit</div></a></div>
+            <div class="item7" id="topRight"></div>
+            <div class="item8" id="bottomBorder"></div>
+            <div class="item9 {{.Info.ModeWeb}}" id="homeButton"><a href="../radioControl/web">WEB</a></div> 
+            <div class="item10 {{.Info.ModeMp3}}" id="radioButton"><a href="../radioControl/mp3">MP3</a></div> 
+            <div class="item11 {{.Info.ModeDab}}" id="rand1Button"><a href="../radioControl/dab">DAB+</a></div> 
+            <div class="item12 {{.Info.ModeUkw}}" id="labButton"><a href="../radioControl/ukw">UKW</a></div> 
+            <div class="item13 {{.Info.ModeAux}}" id="aboutButton"><a href="../radioControl/aux">AUX</a></div> 
+            <div class="item3" id="mainFrame">
+                <br>
+                <div id="presetList">
+                {{range $i, $v := .Info.Presets}}
+                    <br>    
+                    <a href="../radioControl/preset?value={{$i}}">{{$v}}</a>
+                {{end}}
+                </div>
+                <div id="volumeControl">
+                    <a href="../radioControl/increaseVolume">&plus;</a>
+                    <br>
+                    <a href="../radioControl/mute"><img src="/addons/images/{{.Info.MuteState}}" alt="speaker" id="icon"></a>
+                    <br>
+                    <a href="../radioControl/decreaseVolume">&minus;</a>
+                </div>                
+
+            </div>
+        </div>
+	</body>
+
+</html>
