@@ -23,9 +23,10 @@ var templates = template.Must(template.ParseFiles("./templates/home.html",
 	"./templates/radioControl.html",
 	"./templates/about.html",
 	"./templates/lab.html",
-	"./templates/tempGraph.html"))
+	"./templates/tempGraph.html",
+	"./templates/badi.html"))
 
-var validPath = regexp.MustCompile("^/(home|radio|about|lab|tempGraph|radioControl)/([a-zA-Z0-9_ ]+)$")
+var validPath = regexp.MustCompile("^/(home|radio|about|lab|tempGraph|radioControl|badi)/([a-zA-Z0-9_ ]+)$")
 
 var cfg = config.New("./config/config.yaml")
 
@@ -312,6 +313,16 @@ func loadTempGraphHandler(w http.ResponseWriter, r *http.Request, title string) 
 	renderTemplate(w, "tempGraph", p)
 }
 
+func loadBadiHandler(w http.ResponseWriter, r *http.Request, title string) {
+	p, err := loadAboutInformation()
+	if err != nil {
+		title = "Information"
+		http.Redirect(w, r, "/TODO/"+title, http.StatusFound)
+		return
+	}
+	renderTemplate(w, "badi", p)
+}
+
 func makeHandler(fn func(http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		m := validPath.FindStringSubmatch(r.URL.Path)
@@ -338,16 +349,20 @@ func main() {
 	http.HandleFunc("/lab/", makeHandler(loadLabHandler))
 	http.HandleFunc("/tempGraph/", makeHandler(loadTempGraphHandler))
 	http.HandleFunc("/radioControl/", makeHandler(loadRadioControlHandler))
+	http.HandleFunc("/badi/", makeHandler(loadBadiHandler))
 	http.Handle("/addons/", http.StripPrefix("/addons/", http.FileServer(http.Dir("addons"))))
 
 	fmt.Println("Reporting is Running")
+	fmt.Println(cfg.GetServerPort())
+	fmt.Println(cfg.GetRadioIP())
+	fmt.Println(cfg.GetRadioPin())
 
 	go func() {
 		err := server.ListenAndServe()
 		if err.Error() == "http: Server closed" {
 
 		} else {
-			check.Error("Listen And Serve Error", err)
+			check.Error("Listen And Serve Error ", err)
 		}
 
 	}()

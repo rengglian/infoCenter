@@ -1,0 +1,224 @@
+digraph BatCaveNetwork { 
+    label = ""
+    labelloc = top;
+ 
+    node [shape=none];
+    edge [dir=both];
+
+    bgcolor="black";
+
+    subgraph cluster_cloud {
+    label = "";
+    style=invis
+    cloud  [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/cloud.svg" /></td></tr>
+            </table>
+        >
+        URL="https://www.google.com"
+        target="blank"
+        ];
+    }
+
+    subgraph cluster_modem {
+    label = ""
+    shape = none
+    
+    upc  [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/upc.png" /></td></tr>
+                <tr><td bgcolor="lightblue"><b>UPC Router</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.0.1</font></td></tr>
+
+            </table>
+        >
+        URL="http://192.168.0.1/"
+        target="blank"
+        ];
+    }
+    subgraph cluster_linksys {
+    style=dotted
+    wifi  [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/wifi.svg" /></td></tr>
+                <tr><td bgcolor="lightblue"><b>Linksis Router</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.1.1</font></td></tr>
+            </table>
+        >
+        URL="http://192.168.1.1/"
+        target="blank"
+        ];    
+    }            
+
+    subgraph cluster_proxmox {
+        label = "";
+        color="#c77000"
+        eth0 [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/proxmox.png" /></td></tr>
+                <tr><td bgcolor="lightblue"><b>PROXMOX</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.1.66</font></td></tr>
+            </table>
+        >
+        URL="https://192.168.1.66:8006"
+        target="blank"
+        ];
+
+        subgraph cluster_proxmox_intern {
+        label = "";
+		color="#c77000"
+        style=dotted
+        vm100 [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/arch.png" /></td></tr>
+                <tr><td bgcolor="lightblue"><b>ArchServer</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.1.207</font></td></tr>
+            </table>
+        >];
+        vm101 [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/pihole.png" /></td></tr>
+                <tr><td bgcolor="lightblue"><b>PI-Hole</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.1.226</font></td></tr>
+            </table>
+        >
+        URL="http://192.168.1.226/admin/"
+        target="blank"
+        ];
+        vm102 [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/omv.png" /></td></tr>
+                <tr><td bgcolor="lightblue"><b>OMV</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.1.200</font></td></tr>
+            </table>
+        >
+        URL="http://192.168.1.200"
+        target="blank"
+        ];
+
+        vm102ct1 [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/pyload.png" /></td></tr>
+                <tr><td bgcolor="lightblue"><b>PyLoad</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.1.200</font></td></tr>
+            </table>
+        >
+        URL="http://192.168.1.200:8000"
+        target="blank"
+        ];
+
+        vm102ct2 [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/prism.svg" /></td></tr>
+                <tr><td bgcolor="lightblue"><b>PhotoPrism</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.1.200</font></td></tr>
+            </table>
+        >
+        URL="http://192.168.1.200:2342"
+        target="blank"
+        ];
+
+        vm100ct1 [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/kibana.png" /></td></tr>
+                <tr><td bgcolor="lightblue"><b>Kibana</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.1.207</font></td></tr>
+            </table>
+        >
+        URL="https://192.168.1.207:5601"
+        target="blank"
+        ];
+
+        ct104 [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/plex.png" /></td></tr>
+                <tr><td bgcolor="lightblue"><b>Plex</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.1.77</font></td></tr>
+            </table>
+        >
+        URL="http://192.168.1.77:32400"
+        target="blank"
+        ];	
+
+        }
+
+        eth0 -> vm100 [color = "#CC6699"]
+        eth0 -> vm101 [color = "#CC6699"]
+        eth0 -> vm102 [color = "#CC6699"]
+        eth0 -> ct104 [color = "#CC6699"]
+        vm100 -> vm100ct1 [color = "#CC6699"]
+        vm102 -> vm102ct1 [color = "#CC6699"]
+        vm102 -> vm102ct2 [color = "#CC6699"]
+    }  
+
+    subgraph cluster_printer {
+    label = ""
+    shape = none
+    color="#c77000"
+    printer  [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/printer.svg" /></td></tr>
+                <tr><td bgcolor="lightblue"><b>HP OfficeJet Pro</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.1.86</font></td></tr>
+            </table>
+        >
+        URL="http://192.168.1.86/"
+        target="blank"
+        ];
+    } 
+
+
+    subgraph cluster_radio {
+    label = ""
+    shape = none
+    color="#c77000"
+    radio  [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/radio.svg" /></td></tr>
+                <tr><td bgcolor="lightblue"><b>Radio</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.1.204</font></td></tr>
+            </table>
+        >
+        URL="http://192.168.1.204/"
+        target="blank"
+        ];
+    } 
+
+    subgraph cluster_kodi {
+    label = ""
+    shape = none
+    color="#c77000"
+    kodi  [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/kodi.png" /></td></tr>
+                <tr><td bgcolor="lightblue"><b>Kodi</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.1.128</font></td></tr>
+            </table>
+        >
+        URL="http://192.168.1.128/"
+        target="blank"
+        ];
+    }  
+
+    subgraph cluster_raspi {
+    label = ""
+    shape = none
+    color="#c77000"
+    raspi  [label=<
+            <table border="0" cellborder="0" cellspacing="0" cellpadding="4">
+                <tr><td fixedsize="true" width="50" height="50" align="center"><img src="icons/raspi.png" /></td></tr>
+                <tr><td bgcolor="lightblue" align="center"><b>Raspberry Hub</b></td></tr>
+                <tr><td align="left"><font color="#ffcc66">IP: 192.168.1.102</font></td></tr>
+
+            </table>
+        >];
+    }    
+ 
+    cloud -> upc [color = "#CC6699"]
+    upc -> wifi [color = "#CC6699"]
+	wifi -> eth0 [color = "#CC6699"]
+    wifi -> printer [color = "#CC6699"]
+    wifi -> radio [color = "#CC6699"]
+    wifi -> kodi [color = "#CC6699"]
+    wifi -> raspi [color = "#CC6699"]
+}

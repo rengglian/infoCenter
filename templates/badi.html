@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-        <meta http-equiv="refresh" content="120" />
-		<link rel="stylesheet" type="text/css" href="/addons/styles/styles.css?v=1.2">
+        <link rel="stylesheet" type="text/css" href="/addons/styles/styles.css?v=1.2">
+        <script src="https://app.ticos-systems.cloud/scripts/AngularEmbeddedCounter.js"></script> 
 	</head>
 	
 	<body>
@@ -14,20 +14,23 @@
             <div class="item6" id="bottomBorder"><div id="dateCell">{{.Info.DateStr}}</div></div>
             <div class="item7" id="topBorder"></div>
             <div class="item8" id="bottomBorder"></div>
-            <div class="item9 activeButton" id="homeButton">Home</div> 
+            <div class="item9" id="homeButton"><a href="../home/index">Home</a></div>  
             <div class="item10" id="radioButton"><a href="../radio/index">Radio</a></div> 
-            <div class="item11" id="rand1Button"><a href="../badi/index">Badi</a></div>  
+            <div class="item11 activeButton" id="rand1Button">Badi</div> 
             <div class="item12" id="labButton"><a href="../lab/index">lab</a></div> 
             <div class="item13" id="aboutButton"><a href="../about/index">About</a></div> 
             <div class="item3" id="mainFrame">
                 <br>
-                
-                    {{range .LocationInfo.Items}}
-                    <a href="../tempGraph/{{.Location}}"><div id="{{.ID}}"><img src="/addons/images/{{.Icon}}" alt="{{.Location}}" id="icon">&emsp;{{printf "%.1f" .Temperature}}°C / {{printf "%.1f" .Humidity}}%</div>
-                    <div id="{{.ID}}Small">&darr;{{printf "%.1f" .MinTemperature}}°C @ {{.MinTimeStr}}</div>
-                    <div id="{{.ID}}Small">&uarr;{{printf "%.1f" .MaxTemperature}}°C @ {{.MaxTimeStr}}</div></a>
-                    <br>
-                    {{end}}
+                    <iframe onload="iFrameHeight(this)"	id="blockrandom-98"
+                    name=""
+                    src="https://www.badi-info.ch/_temp/_status/olten-status.htm"
+                    width="100%"
+                    height="130"
+                    scrolling="no"
+                    frameborder="0"
+                    title="Aktuelle Besucherzahl"
+                    class="wrapper" >
+                    Keine IFrames</iframe>
             </div>
         </div>
         <script src="/addons/js/refresh.js"></script>

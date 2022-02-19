@@ -14,7 +14,7 @@ import (
 	"infoCenter/internal/check"
 	"infoCenter/internal/structs"
 
-	"github.com/elastic/go-elasticsearch/v7"
+	"github.com/elastic/go-elasticsearch/v8"
 )
 
 //Connection external
@@ -56,7 +56,7 @@ func (es *Connection) ListEnviroLocations() []string {
 		"aggs" : { 
 			"location":{ 
 				"terms" : { 
-							"field" : "Location.keyword", 
+							"field" : "document.Location.keyword", 
 							"size":10000 
 						}
 					}
@@ -104,7 +104,7 @@ func (es *Connection) GetLast24hr(location string) structs.LocationEntry {
 			  },
 					{
 					  "match_phrase": {
-					  "Location.keyword": {
+					  "document.Location.keyword": {
 					  "query": "%s"
 					  }
 				  }
@@ -153,11 +153,12 @@ func (es *Connection) GetLast24hr(location string) structs.LocationEntry {
 		tmpTime, err := time.Parse(time.RFC3339, r["hits"].(map[string]interface{})["hits"].([]interface{})[0].(map[string]interface{})["_source"].(map[string]interface{})["@timestamp"].(string))
 		var tmpMinTime time.Time
 		var tmpMaxTime time.Time
-		locationEntry.Temperature = r["hits"].(map[string]interface{})["hits"].([]interface{})[0].(map[string]interface{})["_source"].(map[string]interface{})["Temperature"].(float64)
-		locationEntry.Humidity = r["hits"].(map[string]interface{})["hits"].([]interface{})[0].(map[string]interface{})["_source"].(map[string]interface{})["Humidity"].(float64)
+		locationEntry.Temperature = r["hits"].(map[string]interface{})["hits"].([]interface{})[0].(map[string]interface{})["_source"].(map[string]interface{})["document"].(map[string]interface{})["Temperature"].(float64)
+		locationEntry.Humidity = r["hits"].(map[string]interface{})["hits"].([]interface{})[0].(map[string]interface{})["_source"].(map[string]interface{})["document"].(map[string]interface{})["Humidity"].(float64)
+
 		check.Error("Time Parse Error", err)
 		for _, value := range r["hits"].(map[string]interface{})["hits"].([]interface{}) {
-			tmpTemperature := value.(map[string]interface{})["_source"].(map[string]interface{})["Temperature"].(float64)
+			tmpTemperature := value.(map[string]interface{})["_source"].(map[string]interface{})["document"].(map[string]interface{})["Temperature"].(float64)
 			if tmpTemperature > locationEntry.MaxTemperature {
 				locationEntry.MaxTemperature = tmpTemperature
 				tmpMaxTime, err = time.Parse(time.RFC3339, value.(map[string]interface{})["_source"].(map[string]interface{})["@timestamp"].(string))
@@ -197,8 +198,8 @@ func (es *Connection) GetLastWeek(location string) structs.TempDetails {
 	{
 		"_source": [
 		  "@timestamp",
-		  "Temperature",
-		  "Humidity"
+		  "document.Temperature",
+		  "document.Humidity"
 		],
 		"sort": [
 		  {
@@ -212,12 +213,12 @@ func (es *Connection) GetLastWeek(location string) structs.TempDetails {
 			"must": [
 			  {
 				"exists": {
-				  "field": "Temperature"
+				  "field": "document.Temperature"
 				}
 			  },
 			  {
 				"wildcard": {
-				  "Location.keyword": {
+				  "document.Location.keyword": {
 					"value": "%s"
 				  }
 				}
@@ -258,8 +259,8 @@ func (es *Connection) GetLastWeek(location string) structs.TempDetails {
 
 			var item structs.TempEntry
 			item.TimeStr = value.(map[string]interface{})["_source"].(map[string]interface{})["@timestamp"].(string)
-			item.Temperature = value.(map[string]interface{})["_source"].(map[string]interface{})["Temperature"].(float64)
-			item.Humidity = value.(map[string]interface{})["_source"].(map[string]interface{})["Humidity"].(float64)
+			item.Temperature = value.(map[string]interface{})["_source"].(map[string]interface{})["document"].(map[string]interface{})["Temperature"].(float64)
+			item.Humidity = value.(map[string]interface{})["_source"].(map[string]interface{})["document"].(map[string]interface{})["Humidity"].(float64)
 			entry.AddItem(item)
 		}
 	}
